@@ -1,0 +1,25 @@
+String regex = "^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[A-Za-z]{2,}$";
+1.  ^ và $ đại diện cho sự khớp từ đầu đến cuối chuỗi.
+2.  [A-Za-z0-9]+ đại diện cho một hoặc nhiều ký tự chữ thường, hoa hoặc số ở phần trước dấu '@'.
+3.  @ đại diện cho ký tự '@' đứng đầu ở giữa.
+4.  [A-Za-z0-9]+ đại diện cho một hoặc nhiều ký tự chữ thường, hoa hoặc số sau dấu '@'.
+5.  \\. đại diện cho ký tự dấu chấm, nhưng bạn cần phải tránh việc nó bị xem như một ký tự thoát ngược trong chuỗi regex bằng cách sử dụng \\ để thể hiện ký tự dấu chấm trong regex.
+6.  [A-Za-z]{2,} đại diện cho ít nhất hai ký tự chữ thường hoặc hoa sau dấu chấm. Bạn có thể điều chỉnh số 2 thành số khác nếu bạn muốn ít nhất 3 hoặc nhiều ký tự sau dấu chấm.
+7.  $ kết thúc chuỗi
+
+import java.util.regex.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String email = "example123@domain.com";
+        String regex = "^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[A-Za-z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        if (matcher.matches()) {
+            System.out.println("Email hợp lệ.");
+        } else {
+            System.out.println("Email không hợp lệ.");
+        }
+    }
+}

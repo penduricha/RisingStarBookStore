@@ -1,0 +1,57 @@
+"^(?:[A-Z][a-z\\p{L}]*\\s?){1,5}$";
+
+1. ^: Bắt đầu chuỗi
+
+2. (?: ... ): Đây là một nhóm không ghi nhớ, nghĩa là nó không sẽ không ghi nhớ kết quả của nhóm này. Điều này thường được sử dụng khi bạn muốn nhóm các phần tử lại với nhau nhưng không cần lưu trữ kết quả của nhóm đó.
+
+3. [A-Z]: Một ký tự in hoa.
+
+4. [a-z\\p{L}]*: Một hoặc nhiều ký tự in thường hoặc ký tự Unicode (sử dụng \p{L} để phù hợp với ký tự Unicode). có thể xuất hiện nhiều lần.
+
+5. \\s?: Ký tự khoảng trắng tùy chọn (0 hoặc 1 ký tự khoảng trắng).
+
+6. {1,5}: Một số lượng lặp lại từ 1 đến 5 lần của mẫu trước đó (tức là một ký tự in hoa, sau đó là một chuỗi ký tự
+
+7. $ - Kết thúc của chuỗi.
+
+
+package testValidate;
+
+import java.util.Scanner;
+import java.util.regex.*;
+
+public class NameValidator {
+
+	public static boolean validateName(String name) {
+		 // Regex pattern: Tên viết hoa chữ cái đầu tiên của mỗi từ sau dấu cách, tối đa 30 ký tự
+		String pattern = "^(?:[A-Z][a-z\\p{L}]*\\s?){1,5}$"; // Có thể có tối đa 5 từ, mỗi từ tối đa 30 ký tự
+
+		Pattern regex = Pattern.compile(pattern);
+		Matcher matcher = regex.matcher(name);
+
+		return matcher.matches();
+
+	}
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Nhập tên (hoặc gõ 'exit' để thoát): ");
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            boolean isValid = validateName(input);
+            if (isValid) {
+                System.out.println("Tên hợp lệ!");
+            } else {
+                System.out.println("Tên không hợp lệ. Vui lòng thử lại.");
+            }
+        }
+
+        System.out.println("Kết thúc chương trình.");
+    }
+
+}
